@@ -62,25 +62,14 @@
 
         </info.hoang8f.android.segmented.SegmentedGroup>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
 
             <VideoView
                 android:layout_width="320dp"
                 android:layout_height="200dp"
-                android:id="@+id/actionVideo"
+                android:id="@+id/videoView"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"/>
 
-            <VideoView
-                android:layout_width="320dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:id="@+id/speakVideo"
-                android:layout_margin="10dp"/>
-            </FrameLayout>
 
         <info.hoang8f.android.segmented.SegmentedGroup
             android:layout_gravity="right"

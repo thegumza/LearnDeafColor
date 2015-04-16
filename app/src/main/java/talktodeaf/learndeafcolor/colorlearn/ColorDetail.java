@@ -2,10 +2,14 @@ package talktodeaf.learndeafcolor.colorlearn;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.VideoView;
 
@@ -14,8 +18,10 @@ import com.cengalabs.flatui.views.FlatTextView;
 import talktodeaf.learndeafcolor.R;
 
 public class ColorDetail extends ActionBarActivity {
-
-    private VideoView actionVideo,speakVideo;
+    MediaController mediacontroller;
+    Uri video;
+    private String videofile = "black.mp4";
+    private VideoView videoView;
     private String TAG = "COLOR_DETAIL";
     private FlatTextView colorTitle,colorName,colorType,colorDescription,colorExample;
     private ImageView imageView;
@@ -23,6 +29,8 @@ public class ColorDetail extends ActionBarActivity {
     private int position = ColorList.getColorPosition();
     private Typeface typeface;
     private String[] color = {"สีแดง","สีม่วง","สีน้ำเงิน","สีฟ้า","สีเขียว","สีเหลือง","สีส้ม","สีน้ำตาล","สีดำ","สีขาว"};
+    private String[] actionVideoName={"action_red","action_purple","action_blue","action_sky","action_green","action_yello","action_oragne","action_brown","action_black","action_white"};
+    private String[] speakVideoName={"speak_red","speak_purple","speak_blue","speak_sky","speak_green","speak_yello","speak_oragne","speak_brown","speak_black","speak_white"};
     private String type ="คำนาม";
     private String[] description = {"สีมีความถี่ของแสงที่ต่ำที่สุด ที่ตามนุษย์สามารถแยกแยะได้ สีแดงเป็นสีอย่างสีเลือดหรือสีชาด ใช้ประกอบสิ่งต่างๆ บางอย่างโดยอนุโลมตามลักษณะสี เป็นชื่อเรียกเฉพาะ เช่น มดแดง ผ้าแดง",
                                     "เป็นสีที่ผสมระหว่างสีน้ำเงินและสีแดง โดยปกติสีจะมีอยู่สองโทน คือ สีโทนร้อน และ สีโทนเย็น แต่สีม่วงเป็นสีที่อยู่ตรงกลางระหว่าง สีโทนร้อน และ สีโทนเย็น",
@@ -78,8 +86,7 @@ public class ColorDetail extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.color_detail);
         //VideoView
-        actionVideo = (VideoView)findViewById(R.id.actionVideo);
-        speakVideo = (VideoView)findViewById(R.id.actionVideo);
+        videoView = (VideoView)findViewById(R.id.videoView);
         //RadioButton
         btnTH = (RadioButton)findViewById(R.id.btnTH);
         btnEN = (RadioButton)findViewById(R.id.btnEN);
@@ -97,6 +104,7 @@ public class ColorDetail extends ActionBarActivity {
         btnEN.setTypeface(typeface);
         btnAction.setTypeface(typeface);
         btnSpeak.setTypeface(typeface);
+        mediacontroller = new MediaController(ColorDetail.this);
 
         switch (position){
             case 0 :
@@ -130,11 +138,17 @@ public class ColorDetail extends ActionBarActivity {
                 SetView(position);
                 break;
         }
+
+
         btnAction.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(btnAction.isChecked()){
-
+                    videoView.setVisibility(View.GONE);
+                    videoView.setVisibility(View.VISIBLE);
+                    video = Uri.parse("android.resource://" + getPackageName() + "/raw/"+actionVideoName[position]);
+                    videoView.setVideoURI(video);
+                    videoView.start();
                 }
             }
         });
@@ -143,11 +157,20 @@ public class ColorDetail extends ActionBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(btnSpeak.isChecked()){
-
+                    videoView.setVisibility(View.GONE);
+                    videoView.setVisibility(View.VISIBLE);
+                    video = Uri.parse("android.resource://" + getPackageName() + "/raw/"+speakVideoName[position]);
+                    videoView.setVideoURI(video);
+                    videoView.start();
                 }
             }
         });
 
+        video = Uri.parse("android.resource://" + getPackageName() + "/raw/"+actionVideoName[position]);
+        videoView.setVideoURI(video);
+        videoView.setMediaController(mediacontroller);
+        mediacontroller.setAnchorView(videoView);
+        videoView.start();
 
     }
 
@@ -170,6 +193,15 @@ public class ColorDetail extends ActionBarActivity {
         colorExample.setText("ตัวอย่าง: "+Example[position]);
         colorDescription.setText("ความหมาย: " + description[position]);
         imageView.setImageResource(colorImage[position]);
+            video = Uri.parse("android.resource://" + getPackageName() + "/raw/"+actionVideoName[position]);
+            mediacontroller.setAnchorView(videoView);
+            videoView.setMediaController(mediacontroller);
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                // Close the progress bar and play the video
+                public void onPrepared(MediaPlayer mp) {
+                    videoView.start();
+                }
+            });
 
     }
 
