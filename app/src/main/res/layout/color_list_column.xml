@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/imageView"
+            android:padding="5dp"
+            android:layout_margin="5dp"/>
+         <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/colorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="color"
+                    android:textSize="25dp"
+                    flatui:fl_fontFamily="ThaiSansNeue"
+                    flatui:fl_fontWeight="regular"
+                    flatui:fl_fontExtension="ttf"
+                    flatui:fl_theme="@array/dark"
+                    flatui:fl_textColor="fl_darker"/>
+            </LinearLayout>
+        </LinearLayout>
