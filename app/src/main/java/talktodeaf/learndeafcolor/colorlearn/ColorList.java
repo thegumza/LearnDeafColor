@@ -3,6 +3,7 @@ package talktodeaf.learndeafcolor.colorlearn;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -15,7 +16,7 @@ import talktodeaf.learndeafcolor.model.Color_Model;
 import talktodeaf.learndeafcolor.ui.ColorListAdapter;
 
 
-public class ColorList extends ActionBarActivity {
+public class ColorList extends AppCompatActivity {
     GridView gridView;
     private List<Color_Model> colorList;
     private String[] color = {"สีแดง","สีม่วง","สีน้ำเงิน","สีฟ้า","สีเขียว","สีเหลือง","สีส้ม","สีน้ำตาล","สีดำ","สีขาว"};
