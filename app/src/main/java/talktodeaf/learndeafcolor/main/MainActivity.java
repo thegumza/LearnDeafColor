@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private FlatButton btnLearn,btnGame;
     private Intent learnIntent,gameIntent;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
